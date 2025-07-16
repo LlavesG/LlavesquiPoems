@@ -1,4 +1,6 @@
-﻿namespace LlavesquiPoems.Domain.Entities;
+﻿using System;
+
+namespace LlavesquiPoems.Domain.Entities;
 
 public class Recital
 {

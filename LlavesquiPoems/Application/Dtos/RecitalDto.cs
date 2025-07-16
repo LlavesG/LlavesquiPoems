@@ -1,4 +1,6 @@
-﻿namespace LlavesquiPoems.Application.Dtos;
+﻿using System;
+
+namespace LlavesquiPoems.Application.Dtos;
 
 public class RecitalDto
 {

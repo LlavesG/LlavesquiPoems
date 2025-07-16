@@ -1,4 +1,6 @@
-﻿using LlavesquiPoems.Application.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using LlavesquiPoems.Application.Interfaces;
 using LlavesquiPoems.Application.Interfaces.IRepositories;
 using LlavesquiPoems.Application.Interfaces.IService;
 using LlavesquiPoems.Domain.Entities;
