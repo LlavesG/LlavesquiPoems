@@ -11,4 +11,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Recital> Recitals { get; set; }
+    public DbSet<Product> Products { get; set; }
 }

@@ -10,25 +10,18 @@ namespace LlavesquiPoems.Web.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RecitalsController: ControllerBase
+public class RecitalsController(IRecitalService recitalService) : ControllerBase
 {
-    private readonly IRecitalService _recitalService;
-
-    public RecitalsController(IRecitalService recitalService)
-    {
-        _recitalService = recitalService;
-    }
-
     [HttpGet]
     public async Task<IActionResult> GetUpcomingRecitals()
     {
-        var recitales = await _recitalService.GetUpcomingRecitalsAsync();
+        var recitales = await recitalService.GetUpcomingRecitalsAsync();
         return Ok(recitales);
     }
     [HttpPost]
     public async Task<IActionResult> CreateRecital([FromBody] RecitalDto dto)
     {
-        var recitales = await _recitalService.AddAsync(dto);
+        var recitales = await recitalService.AddAsync(dto);
         return Ok(recitales);
         
     }
@@ -36,14 +29,14 @@ public class RecitalsController: ControllerBase
     [HttpPut()]
     public async Task<IActionResult> UpdateRecital([FromBody] RecitalDto dto)
     {
-         await _recitalService.UpdateAsync(dto);
+         await recitalService.UpdateAsync(dto);
         return Ok();
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteRecital(int id)
     {
-        await _recitalService.DeleteAsync(id);
+        await recitalService.DeleteAsync(id);
         return Ok();
     }
 }

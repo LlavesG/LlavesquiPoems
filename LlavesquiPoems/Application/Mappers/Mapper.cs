@@ -13,7 +13,11 @@ public class Mapper
             City = r.City,
             Date = r.Date,
             Venue = r.Venue,
-            Address = r.Address
+            Address = r.Address,
+            CreatedAt = r.CreatedAt,
+            UpdatedBy = r.UpdatedBy,
+            CreatedBy = r.CreatedBy,
+            UpdatedAt = r.UpdatedAt
         };
         public static Recital ToEntity(RecitalDto r) => new()
         {
@@ -21,7 +25,11 @@ public class Mapper
             City = r.City,
             Date = r.Date,
             Venue = r.Venue,
-            Address = r.Address
+            Address = r.Address,
+            CreatedAt = r.CreatedAt,
+            UpdatedBy = r.UpdatedBy,
+            CreatedBy = r.CreatedBy,
+            UpdatedAt = r.UpdatedAt
         };
     }
 }

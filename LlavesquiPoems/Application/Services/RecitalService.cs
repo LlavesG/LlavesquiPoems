@@ -25,12 +25,15 @@ public class RecitalService : IRecitalService
     }
     public async Task<RecitalDto> AddAsync(RecitalDto dto)
     {
+        dto.CreatedAt = DateTime.UtcNow;
+        dto.UpdatedAt = DateTime.UtcNow;
         var recital =await _repo.AddAsync(Mapper.RecitalMapper.ToEntity(dto));
         return Mapper.RecitalMapper.ToDto(recital);
     }
 
     public async Task UpdateAsync(RecitalDto dto)
     {
+        dto.UpdatedAt = DateTime.UtcNow;
         await _repo.UpdateAsync(Mapper.RecitalMapper.ToEntity(dto));
     }
 
