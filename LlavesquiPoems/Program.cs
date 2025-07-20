@@ -1,6 +1,10 @@
 using System.Linq;
 using System.Reflection;
+using LlavesquiPoems.Application.Interfaces.IRepositories;
+using LlavesquiPoems.Application.Interfaces.IService;
+using LlavesquiPoems.Application.Services;
 using LlavesquiPoems.Infrastructure;
+using LlavesquiPoems.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,9 +47,11 @@ var typesWithInterfaces = assembly.GetTypes()
 
 foreach (var item in typesWithInterfaces)
 {
+   
     builder.Services.AddScoped(item.Interface, item.Impl);
 }
-
+builder.Services.AddScoped<IRecitalRepository, RecitalRepository>();
+builder.Services.AddScoped<IRecitalService, RecitalService>();
 var app = builder.Build();
 
 // Swagger UI only in development
