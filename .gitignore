@@ -1,6 +1,8 @@
-﻿# Build results
+# Build results
 bin/
 obj/
 
 /LlavesquiPoems/appsettings.Production.json
 /LlavesquiPoems/appsettings.Development.json
+.idea/.idea.LlavesquiPoems/.idea/indexLayout.xml
+LlavesquiPoems.sln.DotSettings.user

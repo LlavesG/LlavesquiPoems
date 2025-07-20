@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using LlavesquiPoems.Application.Interfaces.IRepositories;
+using LlavesquiPoems.Application.Interfaces.IRepository;
 using LlavesquiPoems.Application.Interfaces.IService;
 using LlavesquiPoems.Application.Services;
 using LlavesquiPoems.Infrastructure;
@@ -52,6 +53,8 @@ foreach (var item in typesWithInterfaces)
 }
 builder.Services.AddScoped<IRecitalRepository, RecitalRepository>();
 builder.Services.AddScoped<IRecitalService, RecitalService>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();
 
 // Swagger UI only in development
