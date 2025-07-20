@@ -1,2 +1,6 @@
-﻿/LlavesquiPoems/appsettings.Production.json
+﻿# Build results
+bin/
+obj/
+
+/LlavesquiPoems/appsettings.Production.json
 /LlavesquiPoems/appsettings.Development.json
