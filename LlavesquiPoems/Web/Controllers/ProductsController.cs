@@ -1,6 +1,5 @@
+using LlavesquiPoems.Application.Dtos;
 using LlavesquiPoems.Application.Interfaces.IService;
-using LlavesquiPoems.Application.Services;
-using LlavesquiPoems.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LlavesquiPoems.Web.Controllers;
@@ -10,7 +9,7 @@ namespace LlavesquiPoems.Web.Controllers;
 public class ProductsController(IProductService productService) : ControllerBase
 {
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<Product>> Get(int id)
+    public async Task<ActionResult<ProductDto>> Get(int id)
     {
         var product = await productService.GetAsync(id);
         if (product == null)
@@ -19,24 +18,22 @@ public class ProductsController(IProductService productService) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Product>>> GetList()
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetList()
     {
         var products = await productService.GetListAsync();
         return Ok(products);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Product>> Insert(Product product)
+    public async Task<ActionResult<ProductDto>> Insert(ProductDto product)
     {
         var created = await productService.InsertAsync(product);
         return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
     }
 
-    [HttpPut("{id:int}")]
-    public async Task<IActionResult> Update(int id, Product product)
+    [HttpPut()]
+    public async Task<IActionResult> Update( ProductDto product)
     {
-        if (id != product.Id)
-            return BadRequest();
         await productService.UpdateAsync(product);
         return NoContent();
     }

@@ -1,12 +1,13 @@
+using LlavesquiPoems.Application.Dtos;
 using LlavesquiPoems.Domain.Entities;
 
 namespace LlavesquiPoems.Application.Interfaces.IService;
 
 public interface IProductService
 {
-    Task<Product?> GetAsync(int id);
-    Task<IEnumerable<Product>> GetListAsync();
-    Task<Product> InsertAsync(Product product);
-    Task UpdateAsync(Product product);
+    Task<ProductDto?> GetAsync(int id);
+    Task<IEnumerable<ProductDto>> GetListAsync();
+    Task<ProductDto> InsertAsync(ProductDto product);
+    Task UpdateAsync(ProductDto product);
     Task DeleteAsync(int id);
 }

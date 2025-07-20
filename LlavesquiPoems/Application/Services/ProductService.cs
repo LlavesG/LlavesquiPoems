@@ -1,5 +1,7 @@
+using LlavesquiPoems.Application.Dtos;
 using LlavesquiPoems.Application.Interfaces.IRepository;
 using LlavesquiPoems.Application.Interfaces.IService;
+using LlavesquiPoems.Application.Mappers;
 using LlavesquiPoems.Domain.Entities;
 
 namespace LlavesquiPoems.Application.Services;
@@ -13,27 +15,30 @@ public class ProductService : IProductService
         _productRepository = productRepository;
     }
 
-    public async Task<Product?> GetAsync(int id)
+    public async Task<ProductDto?> GetAsync(int id)
     {
-        return await _productRepository.GetByIdAsync(id);
+        var product = await _productRepository.GetByIdAsync(id);
+        return product == null ? null : Mapper.ProductMapper.ToDto(product);
     }
 
-    public async Task<IEnumerable<Product>> GetListAsync()
+    public async Task<IEnumerable<ProductDto>> GetListAsync()
     {
-        return await _productRepository.GetAllAsync();
+        var products = await _productRepository.GetAllAsync();
+        return products.Select(Mapper.ProductMapper.ToDto);
     }
 
-    public async Task<Product> InsertAsync(Product product)
+    public async Task<ProductDto> InsertAsync(ProductDto product)
     {
         product.CreatedAt= DateTime.UtcNow;
         product.UpdatedAt = DateTime.UtcNow;
-        return await _productRepository.AddAsync(product);
+        var productEntity =await _productRepository.AddAsync(Mapper.ProductMapper.ToEntity(product));
+        return Mapper.ProductMapper.ToDto(productEntity);
     }
 
-    public async Task UpdateAsync(Product product)
+    public async Task UpdateAsync(ProductDto product)
     {
         product.UpdatedAt = DateTime.UtcNow;
-        await _productRepository.UpdateAsync(product);
+        await _productRepository.UpdateAsync(Mapper.ProductMapper.ToEntity(product));
     }
 
     public async Task DeleteAsync(int id)

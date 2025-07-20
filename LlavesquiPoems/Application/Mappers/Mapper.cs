@@ -31,5 +31,39 @@ public class Mapper
             CreatedBy = r.CreatedBy,
             UpdatedAt = r.UpdatedAt
         };
+      
+    }
+    public static class ProductMapper
+    {
+        public static ProductDto ToDto(Product p) => new()
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            PublicPrice = p.PublicPrice,
+            ImgUrl = p.ImgUrl,
+            Type = p.Type,
+            Available = p.Available,
+            CreatedAt = p.CreatedAt,
+            UpdatedBy = p.UpdatedBy,
+            CreatedBy = p.CreatedBy,
+            UpdatedAt = p.UpdatedAt
+        };
+        public static Product ToEntity(ProductDto p) => new()
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            Price = p.Price,
+            PublicPrice = p.PublicPrice,
+            ImgUrl = p.ImgUrl,
+            Type = p.Type,
+            Available = p.Available,
+            CreatedAt = p.CreatedAt,
+            UpdatedBy = p.UpdatedBy,
+            CreatedBy = p.CreatedBy,
+            UpdatedAt = p.UpdatedAt
+        };
     }
 }
