@@ -114,6 +114,58 @@ namespace LlavesquiPoems.Migrations
 
                     b.ToTable("Recitals");
                 });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.RecitalProduct", b =>
+                {
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdRecital")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RecitalId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("IdProduct", "IdRecital");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("RecitalId");
+
+                    b.ToTable("RecitalProduct");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.RecitalProduct", b =>
+                {
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Product", "Product")
+                        .WithMany("RecitalsProduct")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Recital", "Recital")
+                        .WithMany("RecitalsProduct")
+                        .HasForeignKey("RecitalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Recital");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("RecitalsProduct");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Recital", b =>
+                {
+                    b.Navigation("RecitalsProduct");
+                });
 #pragma warning restore 612, 618
         }
     }

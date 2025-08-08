@@ -65,5 +65,31 @@ public class Mapper
             CreatedBy = p.CreatedBy,
             UpdatedAt = p.UpdatedAt
         };
+       
+    }
+    public static class UserMapper
+    {
+        public static UserDto ToDto(User u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            Address = u.Address,
+            Passsword = u.Passsword,
+            CreatedAt = u.CreatedAt
+        };
+        public static User ToEntity(UserDto u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            Address = u.Address,
+            Passsword = u.Passsword,
+            CreatedAt = u.CreatedAt
+        };
     }
 }
