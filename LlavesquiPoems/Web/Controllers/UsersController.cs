@@ -4,48 +4,44 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LlavesquiPoems.Web.Controllers;
 
-public class UsersController
+[ApiController]
+[Route("api/[controller]")]
+public class UsersController(IUsersService usersService) : ControllerBase
 {
-
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController(IProductService productService) : ControllerBase
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<UserDto>> Get(int id)
     {
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductDto>> Get(int id)
-        {
-            var product = await productService.GetAsync(id);
-            if (product == null)
-                return NotFound();
-            return Ok(product);
-        }
+        var user = await usersService.GetAsync(id);
+        if (user == null)
+            return NotFound();
+        return Ok(user);
+    }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDto>>> GetList()
-        {
-            var products = await productService.GetListAsync();
-            return Ok(products);
-        }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<UserDto>>> GetList()
+    {
+        var user = await usersService.GetListAsync();
+        return Ok(user);
+    }
 
-        [HttpPost]
-        public async Task<ActionResult<ProductDto>> Insert(ProductDto product)
-        {
-            var created = await productService.InsertAsync(product);
-            return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
-        }
+    [HttpPost]
+    public async Task<ActionResult<ProductDto>> Insert(UserDto user)
+    {
+        var created = await usersService.InsertAsync(user);
+        return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+    }
 
-        [HttpPut()]
-        public async Task<IActionResult> Update(ProductDto product)
-        {
-            await productService.UpdateAsync(product);
-            return NoContent();
-        }
+    [HttpPut()]
+    public async Task<IActionResult> Update(UserDto user)
+    {
+        await usersService.UpdateAsync(user);
+        return NoContent();
+    }
 
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await productService.DeleteAsync(id);
-            return NoContent();
-        }
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await usersService.DeleteAsync(id);
+        return NoContent();
     }
 }

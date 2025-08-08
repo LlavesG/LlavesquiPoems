@@ -76,8 +76,9 @@ public class Mapper
             LastName = u.LastName,
             Email = u.Email,
             Phone = u.Phone,
+            UserName = u.UserName,
             Address = u.Address,
-            Passsword = u.Passsword,
+            Password = u.Password,
             CreatedAt = u.CreatedAt
         };
         public static User ToEntity(UserDto u) => new()
@@ -87,8 +88,9 @@ public class Mapper
             LastName = u.LastName,
             Email = u.Email,
             Phone = u.Phone,
+            UserName = u.UserName,
             Address = u.Address,
-            Passsword = u.Passsword,
+            Password = u.Password,
             CreatedAt = u.CreatedAt
         };
     }

@@ -11,5 +11,8 @@ namespace LlavesquiPoems.Application.Interfaces.IRepository
         Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(int id);
+        void BegingTransaction();
+        void SaveChanges();
+        void RollbackTransaction();
     }
 }

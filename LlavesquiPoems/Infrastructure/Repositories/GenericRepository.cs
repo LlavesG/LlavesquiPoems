@@ -48,5 +48,17 @@ namespace LlavesquiPoems.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public virtual void BegingTransaction()
+        { 
+            _context.Database.BeginTransaction();
+        }
+        public virtual void SaveChanges()
+        { 
+            _context.Database.CommitTransaction();
+        }
+        public virtual void RollbackTransaction()
+        { 
+            _context.Database.RollbackTransaction();
+        }
     }
 }

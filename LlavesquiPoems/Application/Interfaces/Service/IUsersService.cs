@@ -6,7 +6,7 @@ public interface IUsersService
 {
     Task<UserDto?> GetAsync(int id);
     Task<IEnumerable<UserDto>> GetListAsync();
-    Task<UserDto> InsertAsync(UserDto product);
+    Task<UserDto> InsertAsync(UserDto dto);
     Task UpdateAsync(UserDto product);
     Task DeleteAsync(int id);
 }

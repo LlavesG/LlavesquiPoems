@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using LlavesquiPoems.Application.Configurations;
 using LlavesquiPoems.Application.Interfaces.IRepositories;
 using LlavesquiPoems.Application.Interfaces.IRepository;
 using LlavesquiPoems.Application.Interfaces.IService;
@@ -18,7 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
-
+builder.Services.Configure<SmtpConfiguration>(builder.Configuration.GetSection("SmtpConfig"));
+builder.Services.Configure<EncodeConfiguration>(builder.Configuration.GetSection("EncodeConfig"));
 // Add controllers
 builder.Services.AddControllers();
 
@@ -55,6 +57,7 @@ builder.Services.AddScoped<IRecitalRepository, RecitalRepository>();
 builder.Services.AddScoped<IRecitalService, RecitalService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUsersService, UserService>();
 var app = builder.Build();
 
 // Swagger UI only in development
