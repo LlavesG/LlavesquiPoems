@@ -1,4 +1,5 @@
 ﻿using LlavesquiPoems.Application.Dtos;
+using LlavesquiPoems.Application.Models.Dtos;
 using LlavesquiPoems.Domain.Entities;
 
 namespace LlavesquiPoems.Application.Mappers;
@@ -103,6 +104,34 @@ public class Mapper
             UserName = u.UserName,
             Address = u.Address,
             CreatedAt = u.CreatedAt
+        };
+    }
+    public static class QuizMapper
+    {
+        public static QuizDto ToDto(Quiz u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            Description = u.Description,
+            CreatedAt = u.CreatedAt,
+            UpdatedBy = u.UpdatedBy,
+            CreatedBy = u.CreatedBy,UpdatedAt = u.UpdatedAt,
+            Answer = u.Answer,
+            DeadLine = u.DeadLine,
+            IdProduct = u.IdProduct,
+            Answers = u.AnswersUsers.Count,
+        };
+        public static Quiz ToEntity(QuizDto u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            Description = u.Description,
+            CreatedAt = u.CreatedAt,
+            UpdatedBy = u.UpdatedBy,
+            CreatedBy = u.CreatedBy,UpdatedAt = u.UpdatedAt,
+            Answer = u.Answer,
+            DeadLine = u.DeadLine,
+            IdProduct = u.IdProduct,
         };
     }
 }

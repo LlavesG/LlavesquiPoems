@@ -10,6 +10,7 @@ using LlavesquiPoems.Application.Interfaces.Repositories;
 using LlavesquiPoems.Application.Interfaces.Validations.Exceptions;
 using LlavesquiPoems.Application.Services;
 using LlavesquiPoems.Application.Services.Factories.Users;
+using LlavesquiPoems.Application.Services.Sessions;
 using LlavesquiPoems.Infrastructure;
 using LlavesquiPoems.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -66,6 +67,8 @@ builder.Services.AddScoped<IUsersService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailFactory, EmailCreatedFactory>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IQuizzesService, QuizzesService>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddMvc()
     .AddMvcOptions(o => { o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()); });
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
