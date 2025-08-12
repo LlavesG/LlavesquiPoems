@@ -9,7 +9,7 @@ public class Product
     public string Description { get;  set; }    
     public double Price { get;  set; }
     public double PublicPrice { get;  set; }
-    public string ImgUrl { get;  set; }
+    public string ImgUrl { get;  set; } 
     public int Type { get;  set; }
     public bool Available { get;  set; }
     public DateTime CreatedAt { get;  set; }
@@ -17,4 +17,6 @@ public class Product
     public string CreatedBy { get;  set; }
     public string UpdatedBy { get;  set; }
     public virtual ICollection<RecitalProduct> RecitalsProduct { get; set; }
+    public virtual ICollection<Reward> Rewards { get; set; }
+    public virtual ICollection<Quiz> Quizzes { get; set; }
 }

@@ -1,10 +1,14 @@
 using LlavesquiPoems.Application.Dtos;
 using LlavesquiPoems.Application.Interfaces.IService;
+using LlavesquiPoems.Application.Mappers;
+using LlavesquiPoems.Application.Models;
+using LlavesquiPoems.Web.Midelwares;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LlavesquiPoems.Web.Controllers;
 
 [ApiController]
+[ValidateLogin]
 [Route("api/[controller]")]
 public class UsersController(IUsersService usersService) : ControllerBase
 {
@@ -23,17 +27,21 @@ public class UsersController(IUsersService usersService) : ControllerBase
         var user = await usersService.GetListAsync();
         return Ok(user);
     }
-
-    [HttpPost]
-    public async Task<ActionResult<ProductDto>> Insert(UserDto user)
+    
+    [HttpGet("me")]
+    public async Task<ActionResult<UserProfileDto>> GetProfile()
     {
-        var created = await usersService.InsertAsync(user);
-        return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+        HttpContext.Items.TryGetValue("Session", out var sessionObj);
+        var user = await usersService.GetBySessionAsync(sessionObj);
+        if (user == null)
+            return NotFound();
+        return Ok(user);
     }
-
+    
     [HttpPut()]
     public async Task<IActionResult> Update(UserDto user)
     {
+        
         await usersService.UpdateAsync(user);
         return NoContent();
     }

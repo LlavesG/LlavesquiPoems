@@ -22,7 +22,7 @@ namespace LlavesquiPoems.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Order", b =>
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.AnswersUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,8 +30,52 @@ namespace LlavesquiPoems.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Amount")
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("IdQuiz")
                         .HasColumnType("integer");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AnswersUsers");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -43,10 +87,22 @@ namespace LlavesquiPoems.Migrations
                     b.Property<int>("IdProduct")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("IdRecital")
+                        .HasColumnType("integer");
+
                     b.Property<int>("IdUser")
                         .HasColumnType("integer");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RecitalId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("State")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -62,6 +118,8 @@ namespace LlavesquiPoems.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("RecitalId");
 
                     b.HasIndex("UserId");
 
@@ -119,6 +177,56 @@ namespace LlavesquiPoems.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DeadLine")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("IdProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Quizzes");
+                });
+
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Recital", b =>
                 {
                     b.Property<int>("Id")
@@ -144,6 +252,14 @@ namespace LlavesquiPoems.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -182,6 +298,60 @@ namespace LlavesquiPoems.Migrations
                     b.HasIndex("RecitalId");
 
                     b.ToTable("RecitalsProducts");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Reward", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("IdProduct")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdUser")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("State")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rewards");
                 });
 
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.User", b =>
@@ -231,6 +401,25 @@ namespace LlavesquiPoems.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.AnswersUser", b =>
+                {
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Quiz", "Quiz")
+                        .WithMany("AnswersUsers")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LlavesquiPoems.Domain.Entities.User", "User")
+                        .WithMany("AnswersUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Order", b =>
                 {
                     b.HasOne("LlavesquiPoems.Domain.Entities.Product", "Product")
@@ -239,15 +428,34 @@ namespace LlavesquiPoems.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Recital", "Recital")
+                        .WithMany("Orders")
+                        .HasForeignKey("RecitalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LlavesquiPoems.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
 
+                    b.Navigation("Recital");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Quiz", b =>
+                {
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Product", "Product")
+                        .WithMany("Quizzes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.RecitalProduct", b =>
@@ -269,14 +477,53 @@ namespace LlavesquiPoems.Migrations
                     b.Navigation("Recital");
                 });
 
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Reward", b =>
+                {
+                    b.HasOne("LlavesquiPoems.Domain.Entities.Product", "Product")
+                        .WithMany("Rewards")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LlavesquiPoems.Domain.Entities.User", "User")
+                        .WithMany("Rewards")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Product", b =>
                 {
+                    b.Navigation("Quizzes");
+
                     b.Navigation("RecitalsProduct");
+
+                    b.Navigation("Rewards");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Quiz", b =>
+                {
+                    b.Navigation("AnswersUsers");
                 });
 
             modelBuilder.Entity("LlavesquiPoems.Domain.Entities.Recital", b =>
                 {
+                    b.Navigation("Orders");
+
                     b.Navigation("RecitalsProduct");
+                });
+
+            modelBuilder.Entity("LlavesquiPoems.Domain.Entities.User", b =>
+                {
+                    b.Navigation("AnswersUsers");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("Rewards");
                 });
 #pragma warning restore 612, 618
         }

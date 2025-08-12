@@ -93,5 +93,16 @@ public class Mapper
             Password = u.Password,
             CreatedAt = u.CreatedAt
         };
+        public static UserLogedDto ToDtoBasic(User u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            UserName = u.UserName,
+            Address = u.Address,
+            CreatedAt = u.CreatedAt
+        };
     }
 }

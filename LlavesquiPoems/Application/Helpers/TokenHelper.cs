@@ -33,7 +33,7 @@ public class TokenHelper {
         {
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_encodeConfig.tokenKey);
+            var key = Encoding.UTF8.GetBytes(_encodeConfig.tokenKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()), new Claim("userName", user.UserName.ToString()) }),
@@ -51,7 +51,7 @@ public class TokenHelper {
             var token = await GetBearerToken(context);
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_encodeConfig.tokenKey);
+            var key = Encoding.UTF8.GetBytes(_encodeConfig.tokenKey);
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
@@ -66,7 +66,7 @@ public class TokenHelper {
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 Session session = new()
                 {
-                    Id = long.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
+                    Id = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
                     UserName = jwtToken.Claims.First(x => x.Type == "userName").Value
                 };
 
@@ -98,7 +98,7 @@ public class TokenHelper {
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 Session session = new()
                 {
-                    Id = long.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
+                    Id = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
                     UserName = jwtToken.Claims.First(x => x.Type == "userName").Value
                 };
 
@@ -133,7 +133,7 @@ public class TokenHelper {
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 Session session = new()
                 {
-                    Id = long.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
+                    Id = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value),
                     UserName = jwtToken.Claims.First(x => x.Type == "userName").Value
                 };
 

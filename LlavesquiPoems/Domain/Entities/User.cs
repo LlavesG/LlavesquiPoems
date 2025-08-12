@@ -12,4 +12,7 @@ public class User
     public string Password { get; set; }
     public bool Active { get; set; }
     public DateTime CreatedAt { get;  set; }
+    public virtual List<AnswersUser> AnswersUsers { get; set; }
+    public virtual List<Order> Orders { get; set; }
+    public virtual List<Reward> Rewards { get;  set; }
 }

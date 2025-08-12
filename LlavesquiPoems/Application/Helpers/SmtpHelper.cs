@@ -31,7 +31,7 @@ public class SmtpHelper
         
         public  MailMessage CreateEmailValdate(UserDto user, string tokenVal)
         {
-            LinkedResource res = new LinkedResource(EncodeFileHelper.GetUriFile("/Recours/images/logo.jpg"), MediaTypeNames.Image.Jpeg);
+            LinkedResource res = new LinkedResource(EncodeFileHelper.GetUriFile("/Recours/images/logo.png"), MediaTypeNames.Image.Jpeg);
 
             res.ContentId = Guid.NewGuid().ToString();
             string htmlBody = HtmlHelper.GetBodyValidateEmail(user, tokenVal, res.ContentId);
@@ -43,7 +43,7 @@ public class SmtpHelper
 
             message.AlternateViews.Add(avHtml);
 
-            Attachment att = new Attachment(EncodeFileHelper.GetUriFile("/Recours/images/logo.jpg"));
+            Attachment att = new Attachment(EncodeFileHelper.GetUriFile("/Recours/images/logo.png"));
             att.ContentDisposition.Inline = true;
             message.To.Add(new MailAddress("<" + user.Email.ToString() + ">"));
             message.From = new MailAddress("Mib Pubs <mibpubs@gmail.com>");
@@ -56,7 +56,7 @@ public class SmtpHelper
         }
         public  MailMessage CreateEmailValdated(UserDto user)
         {
-            LinkedResource res = new LinkedResource(EncodeFileHelper.GetUriFile("/Recours/images/logo.jpg"), MediaTypeNames.Image.Jpeg);
+            LinkedResource res = new LinkedResource(EncodeFileHelper.GetUriFile("/Recours/images/logo.png"), MediaTypeNames.Image.Jpeg);
 
             res.ContentId = Guid.NewGuid().ToString();
             string htmlBody = HtmlHelper.GetBodyValidatedEmail(user, res.ContentId);
@@ -66,7 +66,7 @@ public class SmtpHelper
             avHtml.LinkedResources.Add(res);
             MailMessage message = new MailMessage();
             message.AlternateViews.Add(avHtml);
-            Attachment att = new Attachment(EncodeFileHelper.GetUriFile("/Recours/images/logo.jpg"));
+            Attachment att = new Attachment(EncodeFileHelper.GetUriFile("/Recours/images/logo.png"));
             att.ContentDisposition.Inline = true;
 
             message.To.Add(new MailAddress("<" + user.Email.ToString() + ">"));

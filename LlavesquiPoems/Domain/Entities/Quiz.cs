@@ -1,18 +1,17 @@
 namespace LlavesquiPoems.Domain.Entities;
 
-public class Order
+public class Quiz
 {
     public int Id { get; set; }
-    public int IdUser { get; set; }
-    public int IdProduct { get; set; }
-    public int?  IdRecital { get; set; }
-    public int State { get; set; } 
-    public double Price { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string Answer { get; set; }
+    public int? IdProduct { get; set; }
     public DateTime CreatedAt { get;  set; }
     public DateTime UpdatedAt { get;  set; }
+    public DateTime DeadLine { get;  set; }
     public string CreatedBy { get;  set; }
     public string UpdatedBy { get;  set; }
-    public virtual User User { get; set; }
     public virtual Product Product { get; set; }
-    public virtual Recital Recital { get; set; }
+    public virtual List<AnswersUser> AnswersUsers { get; set; }
 }
