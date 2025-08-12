@@ -65,5 +65,44 @@ public class Mapper
             CreatedBy = p.CreatedBy,
             UpdatedAt = p.UpdatedAt
         };
+       
+    }
+    public static class UserMapper
+    {
+        public static UserDto ToDto(User u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            UserName = u.UserName,
+            Address = u.Address,
+            Password = u.Password,
+            CreatedAt = u.CreatedAt
+        };
+        public static User ToEntity(UserDto u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            UserName = u.UserName,
+            Address = u.Address,
+            Password = u.Password,
+            CreatedAt = u.CreatedAt
+        };
+        public static UserLogedDto ToDtoBasic(User u) => new()
+        {
+            Id = u.Id,
+            Name = u.Name,
+            LastName = u.LastName,
+            Email = u.Email,
+            Phone = u.Phone,
+            UserName = u.UserName,
+            Address = u.Address,
+            CreatedAt = u.CreatedAt
+        };
     }
 }

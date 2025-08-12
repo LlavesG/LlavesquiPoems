@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using LlavesquiPoems.Application.Interfaces.IRepository;
 using Microsoft.EntityFrameworkCore;
@@ -48,5 +49,31 @@ namespace LlavesquiPoems.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public virtual void BegingTransaction()
+        { 
+            _context.Database.BeginTransaction();
+        }
+        public virtual void SaveChanges()
+        { 
+            _context.Database.CommitTransaction();
+        }
+        public virtual void RollbackTransaction()
+        { 
+            _context.Database.RollbackTransaction();
+        }
+        public bool Exists(Expression<Func<TEntity, bool>> where)
+        {
+            return _dbSet.Any(where);
+        }
+        public Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> where)
+        {
+            return _dbSet.FirstOrDefaultAsync(where);
+        }
+        public int Count(Expression<Func<TEntity, bool>> where)
+        {
+            return _dbSet.Count(where);
+        }
+
+
     }
 }
